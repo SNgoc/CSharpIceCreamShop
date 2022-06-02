@@ -1,0 +1,115 @@
+﻿@{
+    ViewData["Title"] = "Cart";
+}
+@using Newtonsoft.Json.Linq
+@using Newtonsoft.Json
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+    string json = HttpContextAccessor.HttpContext.Session.GetString("cart");
+    List<Cart> listCart = new List<Cart>();
+    double? total_money = 0;
+    if (json != null)
+    {
+        JArray jsonResponse = JArray.Parse(json);
+
+        foreach (var item in jsonResponse)
+        {
+            JObject cartResult = (JObject)item;
+            listCart.Add(JsonConvert.DeserializeObject<Cart>(cartResult.ToString()));
+        }
+    }
+}
+ <!--Page Title-->
+        <section class="page-title centred" style="background-image: url(/assets/images/background/page-title.jpg);">
+            <div class="auto-container">
+                <div class="content-box">
+                    <div class="title">
+                        <h1>Cart Page</h1>
+                    </div>
+                    <ul class="bread-crumb clearfix">
+                        <li><a asp-action="Index" asp-controller="Home">Home</a></li>
+                        <li>Cart Page</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <!--End Page Title-->
+
+
+        <!-- cart section -->
+        <section class="cart-section cart-page">
+            <div class="auto-container">
+                <div class="row clearfix">
+                    <div class="col-lg-12 col-md-12 col-sm-12 table-column">
+                        <div class="table-outer">
+                            <table class="cart-table">
+                                <thead class="cart-header">
+                                    <tr>
+                                        <th colspan="4" class="prod-column">Book Name</th>
+                                        <th class="price">Price</th>
+                                        <th class="quantity">Quantity</th>
+                                        <th>Subtotal</th>
+                                    </tr>    
+                                </thead>
+                                <tbody>
+                                @if (listCart.Count > 0)
+                                {
+                                    @foreach(Cart cart in listCart){
+                                    total_money += cart.Price * cart.Quantity;  
+                                    double? sub = cart.Price * cart.Quantity; 
+                                    <tr>
+                                        <td colspan="4" class="prod-column">
+                                            <div class="column-box">
+                                                <form asp-controller="Cart" asp-action="AddToCart" method="get">
+                                                <div class="remove-btn">
+                                                    <input name="id" value="@cart.BookIceCream.BookId"hidden/>
+                                                    <input name="quantity" value="@cart.Quantity" hidden/>
+                                                    <input name="button" value="delete" hidden>
+                                                    <button type="submit"><i class="fal fa-times"></i></button>                                                  
+                                                </div>
+                                                </form>
+                                                <div class="prod-thumb">
+                                                    <a href="cart"><img src="~/images/book/@cart.BookIceCream.Image" alt=""></a>
+                                                </div>
+                                                <div class="prod-title">
+                                                    @cart.BookIceCream.Title
+                                                </div>    
+                                            </div>
+                                        </td>
+                                        <td class="price">$@cart.Price</td>
+                                        <td class="qty">
+                                            <div class="item-quantity">
+                                                <form asp-controller="Cart" asp-action="AddToCart" method="get">
+                                                <input name="id" value="@cart.BookIceCream.BookId" hidden/>
+                                                <input class="quantity-spinner" type="number" value="@cart.Quantity" name="quantity" min=1>
+                                                <input type="submit" value="Update">
+                                                </form>
+                                            </div>
+                                        </td>
+                                        <td class="sub-total">$@sub</td>   
+                                    </tr>
+                                    }
+                                }
+                                </tbody>    
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="cart-total">
+                    <div class="row">
+                        <div class="col-xl-5 col-lg-12 col-md-12 offset-xl-7 cart-column">
+                            <div class="total-cart-box clearfix">
+                                <h4>Cart Totals</h4>
+                                <ul class="list clearfix">
+                                    <li>Order Total:<span>$@total_money</span></li>
+                                </ul>
+                                <a asp-action="Index" asp-controller="Checkout" class="theme-btn-one">Proceed to Checkout</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- cart section end -->
+

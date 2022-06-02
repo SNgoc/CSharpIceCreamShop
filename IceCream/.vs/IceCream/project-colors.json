@@ -1,0 +1,21 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "3d6e96d7-1d35-4690-88d1-efafd2cd1689": {
+      "ProjectGuid": "3d6e96d7-1d35-4690-88d1-efafd2cd1689",
+      "DisplayName": "IceCreamApi",
+      "ColorIndex": 0
+    },
+    "cd28ff65-5d40-4e7c-961f-40f0ce9ea058": {
+      "ProjectGuid": "cd28ff65-5d40-4e7c-961f-40f0ce9ea058",
+      "DisplayName": "IceCreamClient",
+      "ColorIndex": 1
+    },
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "Miscellaneous Files",
+      "ColorIndex": -1
+    }
+  },
+  "NextColorIndex": 2
+}

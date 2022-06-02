@@ -1,0 +1,79 @@
+﻿@model IceCreamClient.Models.Member
+
+@{
+    ViewData["Title"] = "Detail";
+}
+ <!-- page title area start -->
+            <div class="page-title-area">
+                <div class="row align-items-center">
+                    <div class="col-sm-6">
+                        <div class="breadcrumbs-area clearfix">
+                            <ul class="breadcrumbs pull-left">
+                                <li><a href="index.html">Home</a></li>
+                                <li><span>Table Layout</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- page title area end -->
+            <div class="main-content-inner">
+                <div class="row">
+ <!-- Bordered Table start -->
+                    <div class="col-lg-12 mt-5">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="header-title">Member Information</h4>
+                                <div class="single-table">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered text-center">
+                                            <tbody>
+                                                <tr>
+                                                    <th scope="col">Username</th>
+                                                    <td scope="row">@Html.DisplayFor(model => model.Username)</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">Fullname</th>
+                                                    <td>@Html.DisplayFor(model => model.Fullname)</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">RegisterDay</th>
+                                                    <td>@Html.DisplayFor(model => model.RegisterDay)</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">Email</th>
+                                                    <td>@Html.DisplayFor(model => model.Email)</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">MemberOption</th>
+                                                @if (Model.IdMemberOption == 1)
+                                                {
+                                                     <td>Monthy</td>
+                                                }
+                                                else
+                                                {
+                                                    <td>Yearly</td>
+                                                }
+                                                </tr>
+                                                 <tr>
+                                                    <th scope="row">Member-Day-Left</th>
+                                                     @if (Model.IdMemberOption == 1)
+                                                    {
+                                                     <td>@Math.Ceiling((Convert.ToDateTime(Model.RegisterDay).AddDays(+30) - DateTime.Now).TotalDays).ToString()</td>
+                                                    }
+                                                    else
+                                                    {
+                                                     <td>@Math.Ceiling((Convert.ToDateTime(Model.RegisterDay).AddDays(+365) - DateTime.Now).TotalDays).ToString()</td>
+                                                    }
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                    <!-- Bordered Table end -->
+

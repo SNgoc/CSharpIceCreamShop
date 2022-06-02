@@ -1,0 +1,90 @@
+﻿@model IEnumerable<IceCreamClient.Models.Recipe>
+@{
+    ViewData["Title"] = "Recipe";
+}
+
+
+    <!-- page title area start -->
+    <div class="page-title-area">
+        <div class="row align-items-center">
+            <div class="col-sm-6">
+                <div class="breadcrumbs-area clearfix">
+                    <ul class="breadcrumbs pull-left">
+                        <li><a asp-action="Index" asp-controller="Recipe">Recipe</a></li>
+                        <li><span>Datatable</span></li>
+                    </ul>
+                </div>
+            </div>        
+        </div>
+    </div>
+<!-- page title area end -->
+<div class="main-content-inner">
+    <div class="row">
+        <!-- data table start -->
+        <div class="col-12 mt-5">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="header-title">Recipe List</h4>                    
+                    @if (TempData["Error"] != null)
+                    {
+                        <div>
+                            <p style="color: darkred; font-weight: bold;">@TempData["Error"]</p>
+                        </div>
+                    }
+                    @if (TempData["Success"] != null)
+                    {
+                        <div>
+                            <p style="color: darkgreen; font-weight: bold;">@TempData["Success"]</p>
+                        </div>
+                    }
+                    <div class="data-tables datatable-primary">
+                        <table id="dataTable3" class="text-center">
+                            <thead class="text-capitalize">
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Title</th>
+                                    <th>Paying Required</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.RecipeId</td>
+                                        <td>@item.Title</td>
+                                        <td>
+                                            @if (item.PayingRequired == true)
+                                            {
+                                                <a asp-action="UpdatePayingStatus" asp-route-RecipeId="@item.RecipeId" asp-route-payingStatus="false" class="btn btn-danger btn-sm">Deactivate</a>
+                                            }
+                                            else
+                                            {
+                                                <a asp-action="UpdatePayingStatus" asp-route-RecipeId="@item.RecipeId" asp-route-payingStatus="true" class="btn btn-success btn-sm">Activate</a>
+                                            }
+                                        </td>
+                                        <td>
+                                            @if (item.Status == true)
+                                            {
+                                                <a asp-action="UpdateStatus" asp-route-RecipeId="@item.RecipeId" asp-route-status="false" class="btn btn-danger btn-sm">Deactivate</a>
+                                            }
+                                            else
+                                            {
+                                                <a asp-action="UpdateStatus" asp-route-RecipeId="@item.RecipeId" asp-route-status="true" class="btn btn-success btn-sm">Activate</a>
+                                            }
+                                        </td>
+                                        <td><a asp-action="Edit" asp-route-RecipeId="@item.RecipeId">Edit</a></td>
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- data table end -->
+    </div>
+</div>
+<!-- main content area end -->

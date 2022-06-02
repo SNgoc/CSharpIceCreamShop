@@ -1,0 +1,109 @@
+﻿@model IceCreamClient.Models.Recipe
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+
+<!-- page title area start -->
+<div class="page-title-area">
+    <div class="row align-items-center">
+        <div class="col-sm-6">
+            <div class="breadcrumbs-area clearfix">
+                <ul class="breadcrumbs pull-left">
+                    <li><a asp-action="Index" asp-controller="Recipe">Recipe</a></li>
+                    <li><span>Create</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- page title area end -->
+
+<div class="main-content-inner">
+    <div class="row">
+        <div class="col-lg-12 col-ml-12">
+            <div class="row">
+                <!-- Textual inputs start -->
+                <div class="col-12 mt-5">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="header-title">CREATE RECIPE</h4>
+                            @if (TempData["Error"] != null)
+                            {
+                                <div>
+                                    <p style="color: darkred; font-weight: bold;">@TempData["Error"]</p>
+                                </div>
+                            }
+                            <form asp-action="Create" enctype="multipart/form-data">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <div class="form-group">
+                                    <label asp-for="Title" class="col-form-label"></label>
+                                    <input class="form-control" type="text" asp-for="Title">
+                                    <span asp-validation-for="Title" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Description" class="col-form-label"></label>
+                                    <textarea class="form-control" asp-for="Description"></textarea>
+                                    <span asp-validation-for="Description" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Ingredents" class="col-form-label"></label>
+                                    <textarea class="form-control" id="Ingredents" asp-for="Ingredents"></textarea>
+                                    <span asp-validation-for="Ingredents" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Preparation" class="col-form-label"></label>
+                                    <textarea class="form-control" id="Preparation" asp-for="Preparation"></textarea>
+                                    <span asp-validation-for="Preparation" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-form-label">Thumbnail</label>
+                                    <input class="form-control" type="file" name="imageFile">
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-form-label">Category</label>
+                                    <select asp-for="CategoryID" class="form-control">
+                                        <option value="1" selected="selected">Ice Cream</option>
+                                        <option value="2">Dessert</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-form-label">Paying Status</label>
+                                    <select asp-for="PayingRequired" class="form-control">
+                                        <option value="false" selected="selected">No</option>
+                                        <option value="true">Yes</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-form-label">Active Status</label>
+                                    <select asp-for="Status" class="form-control">
+                                        <option value="false" selected="selected">No</option>
+                                        <option value="true">Yes</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" value="Create" class="form-control" />
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- Textual inputs end -->
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="/Admin/Data/ckeditor/ckeditor.js"></script>
+    <script>
+
+        var editor = '';
+        $(document).ready(function () {
+            editor = CKEDITOR.replace('Preparation');
+            editor = CKEDITOR.replace('Ingredents');
+        });
+    </script>
+}
+

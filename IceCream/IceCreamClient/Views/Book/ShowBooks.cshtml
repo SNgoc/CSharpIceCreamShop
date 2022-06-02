@@ -1,0 +1,236 @@
+﻿@model IEnumerable<IceCreamClient.Models.BookIceCream>
+
+@{
+    ViewData["Title"] = "ShowBooks";
+    //show IEnumerable model categories in show list page model
+    IEnumerable<Category> categories = TempData["Categories"] as IEnumerable<Category>;
+    //show IEnumerable model relatedbook Feature Book in showbooks page model
+    IEnumerable<BookIceCream> relatedBook = ViewData["RelateBook"] as IEnumerable<BookIceCream>;
+}
+
+
+<!--Page Title-->
+<section class="page-title centred" style="background-image: url(assets/images/background/page-title.jpg);">
+    <div class="auto-container">
+        <div class="content-box">
+            <div class="title">
+                <h1>Book</h1>
+            </div>
+            <ul class="bread-crumb clearfix">
+                <li><a asp-action="Index" asp-controller="Home">Home</a></li>
+                <li>Show Book</li>
+            </ul>
+        </div>
+    </div>
+</section>
+<!--End Page Title-->
+<!-- shop-page-section -->
+<section class="shop-page-section shop-page-1" style="background-image: url('/assets/images/background/shop-1.jpg');">
+    <div class="auto-container">
+        <div class="row clearfix">
+            <div class="col-lg-3 col-md-12 col-sm-12 sidebar-side">
+                <div class="shop-sidebar default-sidebar">
+                    <div class="sidebar-widget sidebar-search">
+                        <form asp-action="ShowBooks" class="search-form">
+                            <div class="form-group">
+                                <input type="search" name="title" placeholder="Search..." required="">
+                                @*pass value page = 1 to showbooks(title, page) to active page 1 when search*@
+                                <input type="hidden" name="page" value="1" />
+                                <button type="submit"><i class="icon-Search"></i></button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="sidebar-widget sidebar-categories">
+                        <div class="widget-title">
+                            <h3>Shop by Categories</h3>
+                        </div>
+                        <div class="widget-content">
+                            <ul class="categories-list clearfix">
+                                <li><a href="@Url.ActionLink("ShowBooks", "Book", new {page = 1})">All</a></li>
+                                @foreach (var item in categories)
+                                {
+                                    <li><a href="@Url.ActionLink("ShowBookByCategory", "Book", new { CatId = item.CatId, page = 1 })">@item.Name</a></li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                    @* remove price-filter to fix error preloader stuck *@
+                    <div class="sidebar-widget post-widget">
+                        <div class="widget-title">
+                            <h3>Newest Books</h3>
+                        </div>
+                        <div class="post-inner">
+                            @foreach (var item in relatedBook)
+                            {
+                                <div class="post">
+                                    <figure class="image-box">
+                                        <a href="@Url.Action("BookDetails", "Book", new { bookId = item.BookId})">
+                                            <img src="~/images/book/@item.Image" alt="" style="height:100%; width:100%">
+                                         </a>
+                                    </figure>
+                                    <h5><a href="@Url.Action("BookDetails", "Book", new { bookId = item.BookId})">@item.Title</a></h5>
+                                    <p>$@item.Price</p>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-9 col-md-12 col-sm-12 content-side">
+                <div class="our-shop">
+                    <div class="item-shorting clearfix">
+                        <div class="left-column pull-left clearfix">
+                            <div class="text"><p>Showing 1–6 Book of Results</p></div>
+                        </div>
+                        <div class="right-column pull-right clearfix">
+                            <div class="short-box clearfix">
+                                
+                            </div>
+                            <div class="menu-box">
+                                <a href="#"><i class="icon-Menu"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    @if (Model != null && Model.Count() > 0) // nếu search tìm thấy record trong db thì hiển thị
+                    {
+                        <div class="row clearfix">
+                            @* ShowBooks *@
+                            @foreach (var item in Model)
+                            {
+                                @if (item.Active == true)
+                                {
+                                    //show all
+                                    <div class="col-lg-4 col-md-6 col-sm-12 shop-block">
+                                        <div class="shop-block-one">
+                                            <div class="inner-box" style="min-height:500px;">
+                                                <figure class="image-box">
+                                                    @if (item.Image != null)
+                                                    {
+                                                        <img src="~/images/book/@item.Image" alt="no image" style="height:270px; width:100%" />
+                                                    }
+                                                    else
+                                                    {
+                                                        @: No Image
+                                                    }
+                                                </figure>
+                                                <div class="lower-content">
+                                                    <span class="price-box">$@item.Price</span>
+                                                    <h3 style="min-height:100px;">
+                                                        <a href="@Url.ActionLink("BookDetails", "Book", new { bookId = item.BookId })">@item.Title</a>
+                                                    </h3>
+                                                    <ul class="rating clearfix">
+                                                        <li><i class="icon-Star"></i></li>
+                                                        <li><i class="icon-Star"></i></li>
+                                                        <li><i class="icon-Star"></i></li>
+                                                        <li><i class="icon-Star"></i></li>
+                                                        <li><i class="icon-Star"></i></li>
+                                                    </ul>
+                                                    @* Add to cart *@
+                                                    <div class="cart-btn">
+                                                        <form asp-action="AddToCart" asp-controller="Cart" method="get">
+                                                            <input type="hidden" name="id" value="@item.BookId">
+                                                            <input type="hidden" name="quantity" value="1">
+                                                            <button type="submit" class="theme-btn-two" value="add">Add to cart</button>
+                                                        </form>
+
+                                                        @*<a href="shop-details.html" class="theme-btn-two">Add to cart</a>*@
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                            @* End ShowBooks *@
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="row clearfix">
+                            <h5>No keyword for search match name of book</h5>
+                        </div>
+                    }
+                    @* end search if *@
+                    <div class="pagination-wrapper centred">
+                        <ul class="pagination">
+                            @* PAGINATION BOOKS WITH VIEW ALL *@
+                            @if (TempData["Title"] == null)
+                            {
+                                int currentPage = Convert.ToInt32(TempData["CurrentPage"]);
+                                int totalPage = Convert.ToInt32(TempData["TotalPage"]);
+                                if (currentPage != 1)
+                                {
+                                    <li><a asp-action="ShowBooks" asp-controller="Book" asp-route-page="@(Convert.ToInt32(currentPage - 1))">Prev</a></li>
+                                }
+                                else
+                                {
+                                    <li><a href="javascript:void(0)">Prev</a></li>
+                                }
+
+                                for (int i = 1; i <= totalPage; i++)
+                                {
+                                    if (currentPage == i)
+                                    {
+                                        <li><a href="javascript:void(0)" class="active">@i</a></li>
+                                    }
+                                    else
+                                    {
+                                        <li><a asp-action="ShowBooks" asp-controller="Book" asp-route-page="@i">@i</a></li>
+                                    }
+                                }
+
+                                if (currentPage < totalPage)
+                                {
+                                    <li><a asp-action="ShowBooks" asp-controller="Book" asp-route-page="@(Convert.ToInt32(currentPage + 1))">Next</a></li>
+                                }
+
+                                if (currentPage == totalPage)
+                                {
+                                    <li><a href="javascript:void(0)">Next</a></li>
+                                }
+                            }
+                            @* PAGINATION BOOKS WITH VIEW SEARCH *@
+                            else
+                            {
+                                int currentPage = Convert.ToInt32(TempData["CurrentPage"]);
+                                int totalPage = Convert.ToInt32(TempData["TotalPage"]);
+                                if (currentPage != 1)
+                                {
+                                    <li><a asp-action="ShowBooks" asp-controller="Book" asp-route-title="@TempData["Title"]" asp-route-page="@(Convert.ToInt32(currentPage - 1))">Prev</a></li>
+                                }
+                                else
+                                {
+                                    <li><a href="javascript:void(0)">Prev</a></li>
+                                }
+
+                                for (int i = 1; i <= totalPage; i++)
+                                {
+                                    if (currentPage == i)
+                                    {
+                                        <li><a href="javascript:void(0)" class="active">@i</a></li>
+                                    }
+                                    else
+                                    {
+                                        <li><a asp-action="ShowBooks" asp-controller="Book" asp-route-title="@TempData["Title"]" asp-route-page="@i">@i</a></li>
+                                    }
+                                }
+
+                                if (currentPage < totalPage)
+                                {
+                                    <li><a asp-action="ShowBooks" asp-controller="Book" asp-route-title="@TempData["Title"]" asp-route-page="@(Convert.ToInt32(currentPage + 1))">Next</a></li>
+                                }
+
+                                if (currentPage == totalPage)
+                                {
+                                    <li><a href="javascript:void(0)">Next</a></li>
+                                }
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

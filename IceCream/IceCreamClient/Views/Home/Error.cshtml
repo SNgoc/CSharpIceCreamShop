@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewData["Title"] = "Error";
+}
+
+ <!--Page Title-->
+        <section class="page-title centred" style="background-image: url(/assets/images/background/page-title.jpg);">
+            <div class="auto-container">
+                <div class="content-box">
+                    <div class="title">
+                        <h1>Page Not Found</h1>
+                    </div>
+                    <ul class="bread-crumb clearfix">
+                        <li><a href="index.html">Home</a></li>
+                        <li>404</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <!--End Page Title-->
+
+
+        <!-- error-section -->
+        <section class="error-section centred sec-pad">
+            <div class="auto-container">
+                <div class="inner-box">
+                    <h1>404</h1>
+                    <h2>Oops! Page Not Found!</h2>
+                    <div class="btn-box">
+                        <a asp-controller="Home" asp-action="Index" class="theme-btn-two">Go Back To Home</a>
+                        <a asp-controller="Book" asp-action="ShowBooks" class="theme-btn-one">Continue Shopping</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- error-section end -->
+

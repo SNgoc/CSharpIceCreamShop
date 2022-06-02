@@ -1,0 +1,48 @@
+﻿@model IceCreamClient.Models.Member
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+ <!--Page Title-->
+        <section class="page-title centred" style="background-image: url(/assets/images/background/page-title.jpg);">
+            <div class="auto-container">
+                <div class="content-box">
+                    <div class="title">
+                        <h1>Edit information</h1>
+                    </div>
+                    <ul class="bread-crumb clearfix">
+                        <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+                        <li>Edit</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+<!--End Page Title-->
+<section class="ourmenu-section sec-pad">
+    <div class="auto-container">
+        <div class="row">
+            <div class="col-md-4">
+                <form asp-action="Edit">
+                    <input asp-for="Id" class="form-control" hidden="true"/>
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>          
+                    <div class="form-group">
+                        <label asp-for="Email" class="control-label"></label>
+                        <input asp-for="Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Fullname" class="control-label"></label>
+                        <input asp-for="Fullname" class="form-control" />
+                        <span asp-validation-for="Fullname" class="text-danger"></span>
+                    </div>                               
+                    <div class="form-group">
+                        <input type="submit" value="Save" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+

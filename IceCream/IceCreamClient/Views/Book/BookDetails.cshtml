@@ -1,0 +1,156 @@
+﻿@model IceCreamClient.Models.BookIceCream
+@{
+    ViewData["Title"] = "BookDetails";
+    //show IEnumerable model relatedbook in detail page model
+    IEnumerable<BookIceCream> relatedBook = ViewData["RelateBook"] as IEnumerable<BookIceCream>;
+}
+
+<!--Page Title-->
+<section class="page-title centred" style="background-image: url('/assets/images/background/page-title.jpg');">
+    <div class="auto-container">
+        <div class="content-box">
+            <div class="title">
+                <h1>Shop Book Details</h1>
+            </div>
+            <ul class="bread-crumb clearfix">
+                <li><a asp-action="Index" asp-controller="Home">Home</a></li>
+                <li>Details</li>
+            </ul>
+        </div>
+    </div>
+</section>
+<!--End Page Title-->
+<!-- single-product -->
+<section class="single-product">
+    <div class="product-details-content" style="background-image: url('/images/book/@Model.Image')">
+        <div class="auto-container">
+            <div class="row clearfix">
+                <div class="col-lg-6 col-md-12 col-sm-12 image-column">
+                    <div class="bxslider">
+                        @*Error bxslider*@
+                        <div class="slider-content">
+                            <div class="slider-pager">
+                                <ul class="thumb-box">
+                                    <li>
+                                        @* hiển thị image*@
+                                        @if (Model.Image != null)
+                                        {
+                                            <a class="active" data-slide-index="0" href="#">
+                                                <figure>
+                                                    <img src="~/images/book/@Model.Image" alt="picture">
+                                                </figure>
+                                            </a>
+                                        }
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="product-image">
+                                @if (Model.Image != null)
+                                {
+                                    <figure class="image">
+                                        <a href="~/images/book/@Model.Image" class="lightbox-image" data-fancybox="gallery">
+                                            <img src="~/images/book/@Model.Image" alt="picture">
+                                        </a>
+                                    </figure>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12 col-sm-12 content-column">
+                    <div class="product-details">
+                        <h2>@Model.Title</h2>
+                        <h3>$@Model.Price</h3>
+                        <div class="customer-rating clearfix">
+                            <ul class="rating pull-left">
+                                <li><i class="icon-Star"></i></li>
+                                <li><i class="icon-Star"></i></li>
+                                <li><i class="icon-Star"></i></li>
+                                <li><i class="icon-Star"></i></li>
+                                <li><i class="icon-Star"></i></li>
+                            </ul>
+                        </div>
+                        <div class="addto-cart-box">
+                            @* Add to cart *@
+                            <form asp-action="AddToCart" asp-controller="Cart" method="get">
+                                <ul class="clearfix">
+                                    <li><input type="hidden" name="id" value="@Model.BookId"></li>
+                                    <li><input type="number" min="1" max="1000" name="quantity" value="1" placeholder="1" style="width:fit-content;height:50px;"></li>
+                                    <li><button type="submit" class="theme-btn-two" value="add">Add to cart</button></li>
+                                </ul>
+                            </form>
+                        </div>
+                        <div class="other-links">
+                            <ul class="category list">
+                                <li>Category:</li>
+                                <li>Ice Cream</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="product-discription">
+        <div class="auto-container">
+            <div class="tabs-box">
+                <div class="tab-btn-box">
+                    <ul class="tab-btns tab-buttons clearfix">
+                        <li class="tab-btn active-btn" data-tab="#tab-1">Description</li>
+                    </ul>
+                </div>
+                <div class="tabs-content">
+                    <div class="tab active-tab" id="tab-1">
+                        <div class="content-box">
+                            @* Description: Display text decoding html entity*@
+                            @Html.Raw(Model.Description)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="related-product" style="background-image: url(/assets/images/background/single-shop-1.jpg);">
+        <div class="auto-container">
+            <div class="top-title centred">
+                <h2>Related Products</h2>
+            </div>
+            <div class="row clearfix">
+                @foreach (var item in relatedBook)
+                {
+                    <div class="col-lg-3 col-md-6 col-sm-12 shop-block">
+                        <div class="shop-block-one">
+                            <div class="inner-box" style="min-height:500px;">
+                                <figure class="image-box">
+                                    <img src="~/images/book/@Html.Raw(item.Image)" alt="No image" style="height:270px; width:100%">
+                                </figure>
+                                <div class="lower-content">
+                                    <span class="price-box">$@item.Price</span>
+                                    <h3><a href="@Url.Action("BookDetails", "Book", new { bookId = item.BookId})">@Html.Raw(item.Title)</a></h3>
+                                    <ul class="rating clearfix">
+                                        <li><i class="icon-Star"></i></li>
+                                        <li><i class="icon-Star"></i></li>
+                                        <li><i class="icon-Star"></i></li>
+                                        <li><i class="icon-Star"></i></li>
+                                        <li><i class="icon-Star"></i></li>
+                                    </ul>
+                                    @*add to Cart *@
+                                    <div class="cart-btn">
+                                        <form asp-action="AddToCart" asp-controller="Cart" method="get">
+                                            <input type="hidden" name="id" value="@item.BookId">
+                                            <input type="hidden" name="quantity" value="1">
+                                            <button type="submit" class="theme-btn-two" value="add">Add to cart</button>
+                                        </form>
+
+                                        @*<a href="shop-details.html" class="theme-btn-two">Add to cart</a>*@
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+<!-- single-product end -->

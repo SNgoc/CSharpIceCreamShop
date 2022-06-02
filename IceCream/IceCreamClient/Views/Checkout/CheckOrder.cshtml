@@ -1,0 +1,116 @@
+﻿
+@{
+    ViewData["Title"] = "CheckOrder";
+}
+
+<!--Page Title-->
+        <section class="page-title centred" style="background-image: url(/assets/images/background/page-title.jpg);">
+            <div class="auto-container">
+                <div class="content-box">
+                    <div class="title">
+                        <h1>Check Order</h1>
+                    </div>
+                    <ul class="bread-crumb clearfix">
+                        <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+                        <li>Check Order Information</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+<!--End Page Title-->
+
+<!-- contact-section -->
+        <section class="contact-section alternet-2 sec-pad" style="background-image: url(/assets/images/background/contact-3.jpg);">
+            <div class="auto-container">
+                 <div class="row clearfix">
+                    <div class="col-lg-12 col-md-12 col-sm-12 info-column">
+                        <div class="contact-info-inner">
+                            <div class="single-box">
+                                <form asp-action="CheckOrder" asp-controller="Checkout">
+                                    @if(ViewData["Error"] != null){
+                                    <div>@ViewData["Error"]</div>
+                                    }
+                                    <div class="form-group">
+                                        <label>Input your phone</label>
+                                        <input class="form-control" placeholder="Your phone *" name="phone"/>
+                                        <input type="submit" value="Check"/>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row clearfix">
+                    <div class="col-lg-6 col-md-6 col-sm-12 info-column">
+                        <div class="contact-info-inner">
+                            <div class="single-box">
+                                @if(@ViewBag.Order !=null){
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                             <th scope="col">Fullname</th>
+                                             <td scope="row">@ViewBag.Order.Fullname</td>
+                                        </tr>
+                                        <tr>
+                                               <th scope="row">Phone</th>
+                                               <td>@ViewBag.Order.Phone</td>
+                                        </tr>
+                                        <tr>
+                                              <th scope="row">Address</th>
+                                              <td>@ViewBag.Order.Address</td>
+                                        </tr>
+                                        <tr>
+                                              <th scope="row">Email</th>
+                                              <td>@ViewBag.Order.Email</td>
+                                        </tr>                                                                                                  
+                                           @if (ViewBag.Order.IsCompleted == true)
+                                           {
+                                              <tr>
+                                                   <th scope="row">Status</th>
+                                                   <td>Completed</td>
+                                              </tr>
+                                                }
+                                           else
+                                           {
+                                              <tr>
+                                                   <th scope="row">Status</th>
+                                                   <td>Waiting</td>
+                                              </tr>
+                                           }
+                                       </tbody>
+                                </table>                              
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 form-column">
+                        <div class="form-inner">
+                            @if(ViewBag.Details != null)
+                            {        
+                            <table>
+                                <thead>
+                                    <tr>
+                                         <th>Book Title</th>
+                                         <th>Price</th>
+                                         <th>Quantity</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach(var detail in ViewBag.Details){
+                                    <tr>
+                                        <td>@detail.BookIceCream.Title</td>
+                                        <td>@detail.Price</td>
+                                        <td>@detail.Quantity</td>
+                                    </tr>
+                                    }
+                                </tbody>
+                            </table>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- contact-section end -->
+

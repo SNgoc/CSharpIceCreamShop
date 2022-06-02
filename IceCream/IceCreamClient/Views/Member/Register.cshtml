@@ -1,0 +1,151 @@
+﻿@model IceCreamClient.Models.Member
+
+@{
+    ViewData["Title"] = "Register";
+}
+
+<!--Page Title-->
+        <section class="page-title centred" style="background-image: url(/assets/images/background/page-title.jpg);">
+            <div class="auto-container">
+                <div class="content-box">
+                    <div class="title">
+                        <h1>Register</h1>
+                    </div>
+                    <ul class="bread-crumb clearfix">
+                        <li><a asp-action="Index" asp-controller="Home">Home</a></li>
+                        <li>Register</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <!--End Page Title-->
+
+
+        <!-- checkout-section -->
+        <section class="checkout-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 upper-column">
+                        <div class="upper-box">
+                            <div class="customer single-box">Returning Customer? <a asp-action="Login" asp-controller="Member">Click here to Login</a></div>
+                        </div>
+                    </div>
+                </div>
+                <form asp-action="Register" method="post" class="billing-form" id="RegisterForm">
+                <div class="row">
+                    <div class="col-lg-6 col-md-12 col-sm-12 left-column">
+                        <div class="inner-box">
+                            <div class="billing-info">
+                                <h4 class="sub-title">Billing Details</h4>                           
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+                                            <label>Username*</label>
+                                            <div class="field-input">
+                                                <input type="text" asp-for="Username">
+                                                <span asp-validation-for="Username" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+                                            <label>Password*</label>
+                                            <div class="field-input">
+                                                <input type="text" asp-for="Password">
+                                                <span asp-validation-for="Password" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+                                            <label>Email Address*</label>
+                                            <div class="field-input">
+                                                <input type="email" asp-for="Email" name="Email">
+                                                <span asp-validation-for="Email" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+                                            <label>Fullname*</label>
+                                            <div class="field-input">
+                                                <input type="text" asp-for="Fullname">
+                                                <span asp-validation-for="Fullname" class="text-danger"></span>
+                                            </div>
+                                        </div>                             
+                                    </div>
+                               
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-12 col-sm-12 right-column">
+                        <div class="inner-box">
+                            <div class="order-info">
+                                <h4 class="sub-title">Your Member Option</h4>
+                                <div class="order-product">
+                                    <ul class="order-list clearfix">
+                                        <li>
+                                            <div class="single-box clearfix">
+                                                <img src="/assets/images/resource/shop/helado-dibujo-png-3.png" alt="">
+                                                <h6>Monthly</h6>
+                                                <span><input type="radio" asp-for="IdMemberOption" value="1" onclick="displayRadioValue1()" /></span>
+                                                <span>$15</span>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="single-box clearfix">
+                                                <img src="/assets/images/resource/shop/images.png" alt="">
+                                                <h6>Yearly</h6>
+                                                <span><input type="radio" asp-for="IdMemberOption" value="2" onclick="displayRadioValue2()"/></span>
+                                                <span>$150</span>
+                                            </div>
+                                        </li>
+              
+                                    </ul>
+                                </div>
+                                
+                            </div>
+                                <div class="btn-box">
+                                    @*<button class="theme-btn-one" type="submit">Register</button>*@
+                                    <!-- PAYPAL SDK -->
+                                    <script src="https://www.paypal.com/sdk/js?client-id=AdYe9xwruxrrU34VISxYUrZxQzKszMHROVUfatDVQUEIAWDUNsoAulmcXZTMsJlUXHzXj-V4gFaPtZHt"></script>
+                                    <div id="paypal-button-container"></div>
+                                </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                 </form>
+            </div>
+        </section>
+
+         <!-- checkout-section end -->
+
+ <script>
+     var id = 0;
+     var price =0;
+function displayRadioValue1() {
+     price = 15;
+}
+function displayRadioValue2() {        
+     price = 150;
+}
+</script>
+<script>
+  paypal.Buttons({
+
+    createOrder: function(data, actions) {
+      // This function sets up the details of the transaction, including the amount and line item details.
+      return actions.order.create({
+        purchase_units: [{
+          amount: {
+            value: price
+          }
+        }]
+      });
+    },
+    onApprove: function(data, actions) {
+      // This function captures the funds from the transaction.
+      return actions.order.capture().then(function(details) {
+        document.getElementById('RegisterForm').submit();
+        // This function shows a transaction success message to your buyer.
+        alert('Transaction completed by ' + details.payer.name.given_name);
+      });
+    }
+  }).render('#paypal-button-container');
+  //This function displays Smart Payment Buttons on your web page.
+</script>
+       

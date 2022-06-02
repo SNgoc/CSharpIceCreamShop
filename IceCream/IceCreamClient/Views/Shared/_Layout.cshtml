@@ -1,0 +1,396 @@
+﻿<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+    <title>Bagery - @ViewData["Title"]</title>
+
+    <!-- Fav Icon -->
+    <link rel="icon" href="~/assets/images/favicon.ico" type="image/x-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,600;0,700;0,800;0,900;1,300;1,400;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+
+    <!-- Stylesheets -->
+    <link href="~/assets/css/font-awesome-all.css" rel="stylesheet">
+    <link href="~/assets/css/flaticon.css" rel="stylesheet">
+    <link href="~/assets/css/owl.css" rel="stylesheet">
+    <link href="~/assets/css/bootstrap.css" rel="stylesheet">
+    <link href="~/assets/css/jquery.fancybox.min.css" rel="stylesheet">
+    <link href="~/assets/css/animate.css" rel="stylesheet">
+    <link href="~/assets/css/color.css" rel="stylesheet">
+    <link href="~/assets/css/jquery-ui.css" rel="stylesheet">
+    <link href="~/assets/css/nice-select.css" rel="stylesheet">
+    <link href="~/assets/css/global.css" rel="stylesheet">
+    <link href="~/assets/css/style.css" rel="stylesheet">
+    <link href="~/assets/css/responsive.css" rel="stylesheet">
+    @RenderSection("Style", false)
+</head>
+<!-- page wrapper -->
+<body>
+@using Newtonsoft.Json.Linq
+@using Newtonsoft.Json
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+    string json = HttpContextAccessor.HttpContext.Session.GetString("cart");
+    string json_user_detail = HttpContextAccessor.HttpContext.Session.GetString("user_detail");
+    List<Cart> listCart = new List<Cart>();
+    Member user = null;
+    if (json != null)
+    {
+        JArray jsonResponse = JArray.Parse(json);
+
+        foreach (var item in jsonResponse)
+        {
+            JObject cartResult = (JObject)item;
+            listCart.Add(JsonConvert.DeserializeObject<Cart>(cartResult.ToString()));
+        }
+    }
+
+    if (json_user_detail != null)
+    {
+        JObject jsonResponse = JObject.Parse(json_user_detail);
+        user = JsonConvert.DeserializeObject<Member>(json_user_detail.ToString());
+    }
+
+}
+
+    <div class="boxed_wrapper">
+        <!-- preloader -->
+        <div class="loader-wrap">
+            <div class="preloader">
+                <div class="preloader-close">Preloader Close</div>
+                <div id="handle-preloader" class="handle-preloader">
+                    <div class="animation-preloader">
+                        <div class="spinner"></div>
+                        <div class="txt-loading">
+                            <span data-text-preloader="B" class="letters-loading">
+                                B
+                            </span>
+                            <span data-text-preloader="A" class="letters-loading">
+                                A
+                            </span>
+                            <span data-text-preloader="G" class="letters-loading">
+                                G
+                            </span>
+                            <span data-text-preloader="E" class="letters-loading">
+                                E
+                            </span>
+                            <span data-text-preloader="R" class="letters-loading">
+                                R
+                            </span>
+                            <span data-text-preloader="Y" class="letters-loading">
+                                Y
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- preloader end -->
+
+
+        @*<div class="product-sidebar">
+            <div class="xs-sidebar-group info-group info-sidebar">
+                <div class="xs-overlay xs-bg-black"></div>
+                <div class="xs-sidebar-widget">
+                    <div class="sidebar-widget-container">
+                        <div class="sidebar-content">
+                            <div class="single-box">
+                                <div class="title-box">
+                                    <h5>New</h5>
+                                </div>
+                                <div class="single-item">
+                                    <figure class="image"><a href="shop-details.html"><img src="~/assets/images/resource/shop/product-1.jpg" alt=""></a></figure>
+                                    <div class="item-name clearfix">
+                                        <h6><a href="shop-details.html">Coffee Chef</a></h6>
+                                        <div class="bye-btn"><a href="shop-details.html">Bye Now</a></div>
+                                    </div>
+                                </div>
+                                <div class="single-item">
+                                    <figure class="image"><a href="shop-details.html"><img src="~/assets/images/resource/shop/product-2.jpg" alt=""></a></figure>
+                                    <div class="item-name clearfix">
+                                        <h6><a href="shop-details.html">Baking Breads</a></h6>
+                                        <div class="bye-btn"><a href="shop-details.html">Bye Now</a></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="single-box">
+                                <div class="title-box">
+                                    <h5>Most Populer</h5>
+                                </div>
+                                <div class="single-item">
+                                    <figure class="image"><a href="shop-details.html"><img src="~/assets/images/resource/shop/product-3.jpg" alt=""></a></figure>
+                                    <div class="item-name clearfix">
+                                        <h6><a href="shop-details.html">Chocolate Cake</a></h6>
+                                        <div class="bye-btn"><a href="shop-details.html">Bye Now</a></div>
+                                    </div>
+                                </div>
+                                <div class="single-item">
+                                    <figure class="image"><a href="shop-details.html"><img src="~/assets/images/resource/shop/product-4.jpg" alt=""></a></figure>
+                                    <div class="item-name clearfix">
+                                        <h6><a href="shop-details.html">French Croissants</a></h6>
+                                        <div class="bye-btn"><a href="shop-details.html">Bye Now</a></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="single-box">
+                                <div class="title-box">
+                                    <h5>Best Sell</h5>
+                                </div>
+                                <div class="single-item">
+                                    <figure class="image"><a href="shop-details.html"><img src="~/assets/images/resource/shop/product-5.jpg" alt=""></a></figure>
+                                    <div class="item-name clearfix">
+                                        <h6><a href="shop-details.html">Donuts Cake</a></h6>
+                                        <div class="bye-btn"><a href="shop-details.html">Bye Now</a></div>
+                                    </div>
+                                </div>
+                                <div class="single-item">
+                                    <figure class="image"><a href="shop-details.html"><img src="~/assets/images/resource/shop/product-6.jpg" alt=""></a></figure>
+                                    <div class="item-name clearfix">
+                                        <h6><a href="shop-details.html">Ice Crem</a></h6>
+                                        <div class="bye-btn"><a href="shop-details.html">Bye Now</a></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>*@
+
+
+        <!-- main header -->
+        <header class="main-header style-one style-five">
+            <!-- header-lower -->
+            <div class="header-lower">
+                <div class="outer-box">
+                    <div class="logo-box">
+                        <a asp-controller="Home" asp-action="Index"><figure class="logo"><img src="~/assets/images/logo-5.png" alt=""></figure></a>
+                    </div>
+                    <div class="menu-area">
+                        <!--Mobile Navigation Toggler-->
+                        <div class="mobile-nav-toggler">
+                            <i class="icon-bar"></i>
+                            <i class="icon-bar"></i>
+                            <i class="icon-bar"></i>
+                        </div>
+                        <nav class="main-menu navbar-expand-md navbar-light">
+                            <div class="collapse navbar-collapse show clearfix" id="navbarSupportedContent">
+                                <ul class="navigation clearfix">
+                                    <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+                                    <li class="dropdown">
+                                        <a asp-controller="Recipe" asp-action="Index" asp-route-page="1">Recipe</a>
+                                        <ul>
+                                            <li><a asp-controller="Recipe" asp-action="Index" asp-route-CategoryID="1" asp-route-page="1">Ice Cream</a></li>
+                                            <li><a asp-controller="Recipe" asp-action="Index" asp-route-CategoryID="2" asp-route-page="1">Dessert</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a asp-controller="Book" asp-action="Index" asp-route-page="1">Book</a></li>
+                                    <li><a asp-controller="Home" asp-action="About">About Us</a></li>
+                                    <li> <a asp-controller="Home" asp-action="Faq">FAQ's</a></li>
+                                    <li><a asp-controller="Contact" asp-action="Index">Contact Us</a></li>
+                                    <li><a asp-controller="Checkout" asp-action="CheckOrder">Check Order</a></li>
+                                    @if(user ==null){
+                                    <li><a asp-controller="Member" asp-action="Login">Login</a></li>
+                                    <li><a asp-controller="Member" asp-action="Register">Register</a></li>
+                                    }else{
+                                    <li><a asp-controller="Member" asp-action="Logout">Logout</a></li>
+                                    }
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+                    <ul class="menu-right-content clearfix">
+                        @if (user != null)
+                        {
+                        <li class="search-box-outer">
+                            Hello, @user.Username
+                        </li>                        
+                        <li class="user-btn">
+                            <a asp-action="Detail" asp-controller="Member" asp-route-id="@user.Id" style="background-image: url(/assets/images/icons/icon-bg-6.png);">
+                                <i class="icon-Profile"></i>
+                            </a>
+                        </li>
+                        }
+                        <li class="cart-btn">
+                            <a asp-action="Index" asp-controller="Cart" style="background-image: url(/assets/images/icons/icon-bg-6.png);">
+                                <i class="icon-Bag"></i>
+                                <span>@listCart.Count</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!--sticky Header-->
+            <div class="sticky-header">
+                <div class="outer-box">
+                    <div class="logo-box">
+                        <figure class="logo"><a href="index.html"><img src="~/assets/images/small-logo.png" alt=""></a></figure>
+                    </div>
+                    <div class="menu-area">
+                        <nav class="main-menu clearfix">
+                            <!--Keep This Empty / Menu will come through Javascript-->
+                        </nav>
+                    </div>
+                    <ul class="menu-right-content clearfix">
+                        @if (user != null)
+                        {
+                        <li class="search-box-outer">
+                            Hello, @user.Username
+                        </li>                        
+                        <li class="user-btn">
+                            <a asp-action="Detail" asp-controller="Member" asp-route-id="@user.Id" style="background-image: url(/assets/images/icons/icon-bg-6.png);">
+                                <i class="icon-Profile"></i>
+                            </a>
+                        </li>
+                        }
+                        <li class="cart-btn">
+                            <a asp-action="Index" asp-controller="Cart" style="background-image: url(/assets/images/icons/icon-bg-6.png);">
+                                <i class="icon-Bag"></i>
+                                <span>@listCart.Count</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+        <!-- main-header end -->
+        <!-- Mobile Menu  -->
+        <div class="mobile-menu">
+            <div class="menu-backdrop"></div>
+            <div class="close-btn"><i class="fas fa-times"></i></div>
+
+            <nav class="menu-box">
+                <div class="nav-logo"><a href="index.html"><img src="~/assets/images/logo-3.png" alt="" title=""></a></div>
+                <div class="menu-outer"><!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header--></div>
+                <div class="contact-info">
+                    <h4>Contact Info</h4>
+                    <ul>
+                        <li>Chicago 12, Melborne City, USA</li>
+                        <li><a href="tel:+8801682648101">+88 01682648101</a></li>
+                        <li><a href="mailto:info@example.com">info@example.com</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div><!-- End Mobile Menu -->
+
+        @RenderBody()
+
+
+
+
+        <!-- main-footer -->
+        <footer class="main-footer" style="background-image: url(/assets/images/background/footer-1.jpg);">
+            <div class="auto-container">
+                <div class="footer-top">
+                    <div class="widget-section">
+                        <div class="row clearfix">
+                            <div class="col-lg-3 col-md-6 col-sm-12 footer-column">
+                                <div class="footer-widget logo-widget">
+                                    <figure class="footer-logo"><a asp-controller="Home" asp-action="Index"><img src="~/assets/images/footer-logo.png" alt=""></a></figure>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6 col-sm-12 footer-column">
+                                <div class="footer-widget contact-widget">
+                                    <div class="widget-title">
+                                        <h3>Contact Info</h3>
+                                    </div>
+                                    <div class="widget-content">
+                                        <ul class="info-list clearfix">
+                                            <li>Flat 20, Reynolds Neck, North <br />Helenaville, FV77 8WS</li>
+                                            <li><a href="mailto:">hallo@example.com</a></li>
+                                            <li><a href="tel:23055873407">+2(305) 587-3407</a></li>
+                                        </ul>
+                                        <ul class="social-links clearfix">
+                                            <li><a href="index.html"><i class="fab fa-google-plus-g"></i></a></li>
+                                            <li><a href="index.html"><i class="fab fa-facebook-f"></i></a></li>
+                                            <li><a href="index.html"><i class="fab fa-twitter"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-6 col-sm-12 footer-column">
+                                <div class="footer-widget links-widget">
+                                    <div class="widget-title">
+                                        <h3>Quick links</h3>
+                                    </div>
+                                    <div class="widget-content">
+                                        <ul class="links-list clearfix">
+                                            <li><a asp-controller="Recipe" asp-action="Index"><i class="fas fa-angle-right"></i>Recipe</a></li>
+                                            <li><a asp-controller="Home" asp-action="About"><i class="fas fa-angle-right"></i>About Us</a></li>
+                                            <li><a asp-controller="Contact" asp-action="Index"><i class="fas fa-angle-right"></i>Contact Us</a></li>
+                                            <li><a asp-controller="Book" asp-action="Index"><i class="fas fa-angle-right"></i>Books</a></li>
+                                            <li><a asp-controller="Home" asp-action="Faq"><i class="fas fa-angle-right"></i>Faq</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12 footer-column">
+                                <div class="footer-widget shediul-widget">
+                                    <div class="border-shape" style="background-image: url(/assets/images/shape/shape-4.png);"></div>
+                                    <div class="widget-title">
+                                        <h3>Opening hours</h3>
+                                    </div>
+                                    <div class="widget-content">
+                                        <ul class="shediul-list clearfix">
+                                            <li>Monday: <span>09 AM - 06PM</span></li>
+                                            <li>Tuesday: <span>09 AM - 06PM</span></li>
+                                            <li>Wednesday: <span>09 AM - 06PM</span></li>
+                                            <li>Thursday: <span>09 AM - 06PM</span></li>
+                                            <li>Friday: <span>09 AM - 06PM</span></li>
+                                            <li>Saturday - Sunday: <span>Closed</span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="auto-container clearfix">
+                    <div class="copyright pull-left">
+                        <p><a asp-controller="home" asp-action="Index">Bagery</a> &copy; 2021 All Right Reserved</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- main-footer end -->
+        <!--Scroll to top-->
+        <button class="scroll-top scroll-to-target" data-target="html">
+            <span class="icon-Arrow-Up"></span>
+        </button>
+    </div>
+
+
+    <!-- jequery plugins -->
+    <script src="~/assets/js/jquery.js"></script>
+    <script src="~/assets/js/popper.min.js"></script>
+    <script src="~/assets/js/bootstrap.min.js"></script>
+    <script src="~/assets/js/owl.js"></script>
+    <script src="~/assets/js/wow.js"></script>
+    <script src="~/assets/js/validation.js"></script>
+    <script src="~/assets/js/jquery.fancybox.js"></script>
+    <script src="~/assets/js/appear.js"></script>
+    <script src="~/assets/js/jquery.countTo.js"></script>
+    <script src="~/assets/js/scrollbar.js"></script>
+    <script src="~/assets/js/jquery.nice-select.min.js"></script>
+    <script src="~/assets/js/nav-tool.js"></script>
+    <script src="~/assets/js/bxslider.js"></script>
+    <script src="~/assets/js/jquery.bootstrap-touchspin.js"></script>
+    <script src="~/assets/js/jquery-ui.js"></script>
+
+    <!-- main-js -->
+    <script src="~/assets/js/script.js"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body><!-- End of .page_wrapper -->
+</html>
+
+

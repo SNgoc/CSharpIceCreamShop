@@ -1,0 +1,134 @@
+﻿@model IceCreamClient.Models.BookIceCream
+
+@{
+    ViewData["Title"] = "UpdateBook";
+    List<Category> categories = TempData["ListCate"] as List<Category>;
+}
+
+<!-- page title area start -->
+<div class="page-title-area">
+    <div class="row align-items-center">
+        <div class="col-sm-6">
+            <div class="breadcrumbs-area clearfix">
+                <ul class="breadcrumbs pull-left">
+                    <li><a asp-action="ShowBooks" asp-controller="Book">Book</a></li>
+                    <li><span>Update</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- page title area end -->
+<div class="main-content-inner">
+    <div class="row">
+        <!-- data table start -->
+        <div class="col-12 mt-5">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="header-title">Book Update</h3>
+                    <div>
+                        <h4 style="text-align:center">@Html.DisplayFor(model => model.Title)</h4>
+                        <hr />
+                        <div class="row">
+                            <div class="col-md-12">
+                                @if (ViewData["success"] != null)
+                                {
+                                    <h4 style="color:forestgreen">@ViewData["success"]</h4>
+                                }
+                                @* Upload Image phải có enctype="multipart/form-data" *@
+                                <form asp-action="UpdateBook" enctype="multipart/form-data">
+                                    @* display error validate in required at BookIceCream model *@
+                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                    <div class="form-group">
+                                        <input type="hidden" asp-for="BookId" class="form-control" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="CatId" class="control-label"></label>
+                                        <label asp-for="CatId" class="control-label">Category</label>
+                                        <select asp-for="CatId" class="form-control" style="height:fit-content">
+                                            @foreach (var item in categories)
+                                            {
+                                                <option value="@item.CatId">@item.Name</option>
+                                            }
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="Title" class="control-label"></label>
+                                        <input asp-for="Title" class="form-control"/>
+                                        <span asp-validation-for="Title" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="Author" class="control-label"></label>
+                                        <input asp-for="Author" class="form-control"/>
+                                        <span asp-validation-for="Author" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="Description" class="control-label"></label>
+                                        <textarea asp-for="Description" id="Description" class="form-control">@Model.Description</textarea>
+                                        <span asp-validation-for="Description" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="Price" class="control-label"></label>
+                                        <input type="number" asp-for="Price" class="form-control"/>
+                                        <span asp-validation-for="Price" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        @* hiển thị image cũ trong db trước khi update *@
+                                        @if (Model.Image != null)
+                                        {
+                                            <p>Old Image</p>
+                                            <div>
+                                                <img src="~/images/book/@Model.Image" alt="picture" style="width: 100px; height: 100px;" />
+                                            </div>
+                                            <hr />
+                                        }
+                                        <label asp-for="Image" class="control-label">New Image</label>
+                                        <input type="file" asp-for="Image" name="Image" class="form-control" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="Active" class="control-label"></label>
+                                        <select asp-for="Active" class="form-control" style="height:fit-content">
+                                            @if (Model.Active == true)
+                                            {
+                                                <option value="true" selected>Yes</option>
+                                                <option value="false">No</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="true">Yes</option>
+                                                <option value="false" selected>No</option>
+                                            }
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="hidden" asp-for="CreateAt" value="@Model.CreateAt" class="form-control" />
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="submit" value="Save" class="btn btn-primary" />
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <a asp-action="ShowBooks">Back to List Books</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- data table end -->
+    </div>
+</div>
+<!-- main content area end -->
+
+@* CKEDITOR *@
+@section Scripts {
+    <script src="/Admin/Data/ckeditor/ckeditor.js"></script>
+    <script>
+
+        var editor = '';
+        $(document).ready(function () {
+            editor = CKEDITOR.replace('Description');
+        });
+    </script>
+}

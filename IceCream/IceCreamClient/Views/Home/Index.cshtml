@@ -1,0 +1,424 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    IEnumerable<BookIceCream> ListBooks = TempData["ListBook"] as IEnumerable<BookIceCream>;
+    IEnumerable<Recipe> IceCreamRecipe = TempData["IceCreamRecipe"] as IEnumerable<Recipe>;
+    IEnumerable<Recipe> DessertRecipe = TempData["DessertRecipe"] as IEnumerable<Recipe>;
+}
+ <!-- banner-section -->
+        <section class="banner-section style-one">
+            <div class="banner-carousel owl-theme owl-carousel owl-dots-none nav-style-one">
+                <div class="slide-item">
+                    <div class="image-layer" style="background-image:url(/assets/images/banner/banner-1.jpg)"></div>
+                    <div class="anim-icon">
+                        <div class="icon icon-1" style="background-image: url(/assets/images/icons/anim-icon-1.png);"></div>
+                        <div class="icon icon-2" style="background-image: url(/assets/images/icons/anim-icon-2.png);"></div>
+                        <div class="icon icon-3" style="background-image: url(/assets/images/icons/anim-icon-3.png);"></div>
+                        <div class="icon icon-4" style="background-image: url(/assets/images/shape/shape-1.png);"></div>
+                        <div class="icon icon-5" style="background-image: url(/assets/images/shape/shape-2.png);"></div>
+                    </div>
+                    <div class="auto-container">
+                        <div class="content-inner">
+                            <div class="content-box">
+                                <h1>Taste From  The Good Old Days.</h1>
+                                <p>Trend Spotted by Europe Locals – Colorful Macarons!</p>
+                                <div class="btn-box">
+                                    <a asp-controller="Recipe" asp-action="Index" class="banner-btn">Explore Now</a>
+                                </div>
+                            </div>
+                            <figure class="image-box style-one">
+                                <img src="~/assets/images/banner/banner-image-1.png" alt="">
+                            </figure>
+                        </div>  
+                    </div>
+                </div>
+                <div class="slide-item">
+                    <div class="image-layer" style="background-image:url(/assets/images/banner/banner-2.jpg)"></div>
+                    <div class="anim-icon">
+                        <div class="icon icon-4" style="background-image: url(/assets/images/shape/shape-1.png);"></div>
+                        <div class="icon icon-5" style="background-image: url(/assets/images/shape/shape-2.png);"></div>
+                        <div class="icon icon-6 rotate-me" style="background-image: url(/assets/images/shape/shape-3.png);"></div>
+                    </div>
+                    <div class="auto-container">
+                        <div class="content-inner">
+                            <div class="content-box">
+                                <h1>Taste From  The Good Old Days.</h1>
+                                <p>Trend Spotted by Europe Locals – Colorful Macarons!</p>
+                                <div class="btn-box">
+                                    <a asp-controller="Recipe" asp-action="Index" class="banner-btn">Explore Now</a>
+                                </div>
+                            </div>
+                            <figure class="image-box style-two"><img src="~/assets/images/banner/banner-image-2.png" alt=""></figure>
+                        </div>  
+                    </div>
+                </div>
+                <div class="slide-item">
+                    <div class="image-layer" style="background-image:url(/assets/images/banner/banner-3.jpg)"></div>
+                    <div class="anim-icon">
+                        <div class="icon icon-1" style="background-image: url(/assets/images/icons/anim-icon-1.png);"></div>
+                        <div class="icon icon-2" style="background-image: url(/assets/images/icons/anim-icon-2.png);"></div>
+                        <div class="icon icon-3" style="background-image: url(/assets/images/icons/anim-icon-3.png);"></div>
+                        <div class="icon icon-4" style="background-image: url(/assets/images/shape/shape-1.png);"></div>
+                        <div class="icon icon-5" style="background-image: url(/assets/images/shape/shape-2.png);"></div>
+                    </div>
+                    <div class="auto-container">
+                        <div class="content-inner">
+                            <div class="content-box">
+                                <h1>Taste From  The Good Old Days.</h1>
+                                <p>Trend Spotted by Europe Locals – Colorful Macarons!</p>
+                                <div class="btn-box">
+                                    <a asp-controller="Recipe" asp-action="Index" class="banner-btn">Explore Now</a>
+                                </div>
+                            </div>
+                            <figure class="image-box style-one"><img src="~/assets/images/banner/banner-image-3.png" alt=""></figure>
+                        </div>  
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- banner-section end -->
+
+
+        <!-- feature-section -->
+        <section class="feature-section">
+            <div class="auto-container">
+                <div class="row clearfix">
+                    <div class="col-lg-4 col-md-6 col-sm-12 feature-block">
+                        <div class="feature-block-one wow fadeInUp animated animated" data-wow-delay="00ms" data-wow-duration="1500ms">
+                            <div class="inner-box">
+                                <div class="count-box" style="background-image: url(/assets/images/icons/icon-bg-2.png);">
+                                    <h4>01</h4>
+                                </div>
+                                <div class="inner">
+                                    <h4>Ice-Cream</h4>
+                                    <p>
+                                        The most delicious place on the Internet! <br />
+                                        There's so much to explore, here at the home of ice cream.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12 feature-block">
+                        <div class="feature-block-one wow fadeInUp animated animated" data-wow-delay="00ms" data-wow-duration="1500ms">
+                            <div class="inner-box">
+                                <div class="count-box" style="background-image: url(/assets/images/icons/icon-bg-2.png);">
+                                    <h4>02</h4>
+                                </div>
+                                <div class="inner">
+                                    <h4>Recipe</h4>
+                                    <p>We have a lot of quality recipe of ice cream and dessert. <br/>
+                                       Let's check it out !
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12 feature-block">
+                        <div class="feature-block-one wow fadeInUp animated animated" data-wow-delay="00ms" data-wow-duration="1500ms">
+                            <div class="inner-box">
+                                <div class="count-box" style="background-image: url(/assets/images/icons/icon-bg-2.png);">
+                                    <h4>03</h4>
+                                </div>
+                                <div class="inner">
+                                    <h4>Book</h4>
+                                    <p>These books are researched and written by myself with 20 years of experience in the professionph.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- feature-section end -->
+
+
+        <!-- ourstory-section -->
+        <section class="ourstory-section sec-pad" style="background-image: url(/assets/images/background/mission-1.jpg);">
+            <div class="auto-container">
+                <div class="sec-title centred">
+                    <p>Our Story</p>
+                    <h2>Traditional & Modern Service <br />Since 1970</h2>
+                </div>
+                <div class="row align-items-center clearfix">
+                    <div class="col-lg-4 col-md-6 col-sm-12 content-column">
+                        <div id="content_block_1">
+                            <div class="content-box">
+                                <h3>About Bagery</h3>
+                                <p>From a humble ice cream trolley, our journey began in 1970 and our ice cream business is now one of the best treat in town.
+                                        After 5 years, our regconition grew fast and we made our way into stores and online selling</p>
+                                <figure class="signature"><img src="~/assets/images/icons/signature-1.png" alt=""></figure>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12 image-column">
+                        <figure class="image-box wow slideInUp animated animated" data-wow-delay="00ms" data-wow-duration="1500ms"><img src="~/assets/images/resource/ice-cream-1.png" alt=""></figure>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12 content-column">
+                        <div id="content_block_2">
+                            <div class="content-box">
+                                <h3>Bagery Overview</h3>
+                                <p>Our ice cream uses the best ingredients, and it is produced with fresh and local milk. 
+                                        Not only does the ice cream shop sell more than 50 flavors that you can buy in tubs, but we also sells books and recipes to make them</p>
+                                <ul class="list clearfix">
+                                    <li><i class="icon-Check-mark"></i>Ice Cream</li>
+                                    <li><i class="icon-Check-mark"></i>Recipe</li>
+                                    <li><i class="icon-Check-mark"></i>Book of Recipe</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="more-btn centred">
+                    <a asp-action="Index" asp-controller="Contact" class="theme-btn-one">Contact Us</a>
+                </div>
+            </div>
+        </section>
+        <!-- ourstory-section end -->
+
+
+        <!-- shop-section -->
+        <section class="shop-section" style="background-image: url(/assets/images/background/shop-1.jpg);">
+            <div class="auto-container">
+                <div class="sec-title">
+                    <p>Our Shop</p>
+                    <h2>Our all Delicious <br />Book of Recipes.</h2>
+                </div>
+                <div class="four-item-carousel owl-carousel owl-theme owl-dots-none nav-style-one">
+                    @* View Books *@
+                    @foreach (var item in ListBooks)
+                    {
+                        <div class="shop-block-one">
+                            <div class="inner-box">
+                                <figure class="image-box">
+                                    <img src="~/images/book/@item.Image" alt="No image" style="height:270px; width:100%">
+                                </figure>
+                                <div class="lower-content">
+                                    <span class="price-box">$@item.Price</span>
+                                    <h3 style="min-height:100px;">
+                                        <a href="@Url.ActionLink("BookDetails", "Book", new { bookId = item.BookId })">@item.Title</a>
+                                    </h3>
+                                    <ul class="rating clearfix">
+                                        <li><i class="icon-Star"></i></li>
+                                        <li><i class="icon-Star"></i></li>
+                                        <li><i class="icon-Star"></i></li>
+                                        <li><i class="icon-Star"></i></li>
+                                        <li><i class="icon-Star"></i></li>
+                                    </ul>
+                                    @* Add to cart *@
+                                    <div class="cart-btn">
+                                        <form asp-action="AddToCart" asp-controller="Cart" method="get">
+                                            <input type="hidden" name="id" value="@item.BookId">
+                                            <input type="hidden" name="quantity" value="1">
+                                            <button type="submit" class="theme-btn-two" value="add">Add to cart</button>
+                                        </form>
+                                        @*<a href="shop-details.html" class="theme-btn-two">Add to cart</a>*@
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </section>
+        <!-- shop-section end -->
+
+
+        <!-- service-section -->
+        <section class="service-section sec-pad centred" style="background-image: url(/assets/images/background/service-1.jpg);">
+            <div class="auto-container">
+                <div class="sec-title">
+                    <p>Services</p>
+                    <h2>Quality & Passion with <br />our Services!</h2>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-lg-3 col-md-6 col-sm-12 service-block">
+                        <div class="service-block-one">
+                            <div class="inner-box">
+                                <div class="icon-box wow fadeInDown animated animated" data-wow-delay="00ms" data-wow-duration="1500ms">
+                                    <div class="bg-layer" style="background-image: url(/assets/images/icons/icon-bg-3.png);"></div>
+                                    <i class="icon-Ice-Cream"></i>
+                                </div>
+                                <div class="lower-content wow fadeInUp animated animated" data-wow-delay="00ms" data-wow-duration="1500ms">
+                                    <h3><a href="service.html">Ice Creams</a></h3>
+                                    <p>Enjoy our flavoursome range of gorgeous ice cream.</p>            
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-12 service-block">
+                        <div class="service-block-one">
+                            <div class="inner-box">
+                                <div class="icon-box wow fadeInDown animated animated" data-wow-delay="400ms" data-wow-duration="1500ms">
+                                    <div class="bg-layer" style="background-image: url(/assets/images/icons/icon-bg-3.png);"></div>
+                                    <i class="icon-Cake"></i>
+                                </div>
+                                <div class="lower-content wow fadeInUp animated animated" data-wow-delay="400ms" data-wow-duration="1500ms">
+                                    <h3><a href="service.html">Dessert</a></h3>
+                                    <p>Become a stockist of our delicious ice cream desert.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-12 service-block">
+                        <div class="service-block-one">
+                            <div class="inner-box">
+                                <div class="icon-box wow fadeInDown animated animated" data-wow-delay="200ms" data-wow-duration="1500ms">
+                                    <div class="bg-layer" style="background-image: url(/assets/images/icons/icon-bg-3.png);"></div>
+                                    <i class="icon-Bread"></i>
+                                </div>
+                                <div class="lower-content wow fadeInUp animated animated" data-wow-delay="200ms" data-wow-duration="1500ms">
+                                    <h3><a href="service.html">Recipe</a></h3>
+                                    <p>The best ice cream contains the best ingredients</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-3 col-md-6 col-sm-12 service-block">
+                        <div class="service-block-one">
+                            <div class="inner-box">
+                                <div class="icon-box wow fadeInDown animated animated" data-wow-delay="600ms" data-wow-duration="1500ms">
+                                    <div class="bg-layer" style="background-image: url(/assets/images/icons/icon-bg-3.png);"></div>
+                                    <i class="icon-Donuts"></i>
+                                </div>
+                                <div class="lower-content wow fadeInUp animated animated" data-wow-delay="600ms" data-wow-duration="1500ms">
+                                    <h3><a href="service.html">Book</a></h3>
+                                    <p>Read all about our latest books. From new recipes to new flavours and updates from around the world about ice cream.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- service-section end -->
+
+
+        <!-- project-section -->
+        <section class="project-section" style="background-image: url(/assets/images/background/gallery-1.jpg);">
+            <div class="auto-container">
+                <div class="row clearfix">
+                    <div class="col-lg-4 col-md-12 col-sm-12 content-column">
+                        <div class="content-box">
+                            <div class="sec-title">
+                                <p>Recipe</p>
+                                <h2>Let’s See Our Recipe</h2>
+                            </div>
+                            <div class="text">
+                                <p>These recipes are written by me and carefully selected. Here are the typical recipes.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-8 col-md-12 col-sm-12 porject-column">
+                        <div class="project-tab">
+                            <div class="tab-btn-box clearfix">
+                                <ul class="project-tab-btns project-btn tab-btns clearfix post-filter pull-right">
+                                    <li class="p-tab-btn active-btn" data-tab="#p-tab-1">Ice Cream</li>
+                                    <li class="p-tab-btn" data-tab="#p-tab-2">Dessert</li>
+                                </ul>
+                            </div>
+                            <div class="tabs-content-inner">
+                                <div class="p-tabs-content">
+                                    <div class="p-tab active-tab" id="p-tab-1">
+                                        <div class="project-carousel owl-carousel owl-theme owl-dots-none nav-style-one">
+                                            @foreach (var item in IceCreamRecipe)
+                                            {
+                                            <div class="project-block-one">
+                                                <div class="inner-box">
+                                                    <figure class="image-box">
+                                                        <a asp-action="Details" asp-controller="Recipe" asp-route-RecipeID="@item.RecipeId"><img src="~/images/recipe/@item.Thumbnail" style="height: 430px; width: 308px;"></a>
+                                                    </figure>
+                                                    <div class="lower-content">
+                                                        <h3>
+                                                            <a asp-action="Index" asp-controller="Recipe" asp-route-CategoryID="@item.CategoryID" asp-route-page="1">Ice Cream</a>
+                                                        </h3>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            } 
+                                        </div>
+                                    </div>
+                                    <div class="p-tab" id="p-tab-2">
+                                        <div class="project-carousel owl-carousel owl-theme owl-dots-none nav-style-one">
+                                            @foreach (var item in DessertRecipe)
+                                            {
+                                                <div class="project-block-one">
+                                                    <div class="inner-box">
+                                                        <figure class="image-box">
+                                                            <a asp-action="Details" asp-controller="Recipe" asp-route-RecipeID="@item.RecipeId"><img src="~/images/recipe/@item.Thumbnail" style="height: 430px; width: 308px;"></a>
+                                                        </figure>
+                                                        <div class="lower-content">
+                                                            <h3>
+                                                                <a asp-action="Index" asp-controller="Recipe" asp-route-CategoryID="@item.CategoryID" asp-route-page="1">Dessert</a>
+                                                            </h3>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>           
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- project-section end -->
+
+
+        <!-- testimonial-section -->
+        <section class="testimonial-section sec-pad" style="background-image: url(/assets/images/background/testimonial-1.jpg);">
+            <figure class="image-layer wow slideInUp animated animated" data-wow-delay="00ms" data-wow-duration="1500ms"><img src="~/assets/images/resource/testimonial-1.png" alt=""></figure>
+            <div class="auto-container">
+                <div class="inner-box">
+                    <div class="sec-title">
+                        <p>Testimonials</p>
+                        <h2>What Clients Say About Bagery.</h2>
+                    </div>
+                    <div class="single-item-carousel owl-carousel owl-theme owl-dots-none nav-style-one">
+                        <div class="testimonial-block-one">
+                            <div class="icon-box" style="background-image: url(/assets/images/icons/icon-bg-5.png);">
+                                <i class="icon-Quote"></i>
+                            </div>
+                            <div class="text">
+                                <p>We were out of town and needed a ice cream fix so we stopped here on the way to enjoy the beach view. The workers were fun and interactive and of course the ice cream was good</p>
+                            </div>
+                            <div class="author-info">
+                                <h4>John Wick</h4>
+                                <span class="designation">Hunter</span>
+                            </div>
+                        </div>
+                        <div class="testimonial-block-one">
+                            <div class="icon-box" style="background-image: url(/assets/images/icons/icon-bg-5.png);">
+                                <i class="icon-Quote"></i>
+                            </div>
+                            <div class="text">
+                                <p>My wife got something chocolate and I got their superman variation. The ice cream was at a good temp so it was creamy and not too frozen. Some ice chunks in it, but all in all a decent superman.</p>
+                            </div>
+                            <div class="author-info">
+                                <h4>Joe Binden</h4>
+                                <span class="designation">President</span>
+                            </div>
+                        </div>
+                        <div class="testimonial-block-one">
+                            <div class="icon-box" style="background-image: url(/assets/images/icons/icon-bg-5.png);">
+                                <i class="icon-Quote"></i>
+                            </div>
+                            <div class="text">
+                                <p>Eating ice cream makes me happy. It’s a mouth-watering dessert for everyone. They many flavors in India that offers ice creams in form of cone, cup, stick etc.</p>
+                            </div>
+                            <div class="author-info">
+                                <h4>Fiona Edwards</h4>
+                                <span class="designation">Developer</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- testimonial-section end -->
+
+
+
+       

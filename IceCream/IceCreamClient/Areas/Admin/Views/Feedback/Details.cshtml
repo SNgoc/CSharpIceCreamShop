@@ -1,0 +1,66 @@
+﻿@model IceCreamClient.Models.Feedback
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+
+<!-- page title area start -->
+            <div class="page-title-area">
+                <div class="row align-items-center">
+                    <div class="col-sm-6">
+                        <div class="breadcrumbs-area clearfix">
+                            <ul class="breadcrumbs pull-left">
+                                <li><a asp-controller="Feedback" asp-action="Index">Feedback</a></li>
+                                <li><span>Details</span></li>
+                            </ul>
+                        </div>
+                    </div>                 
+                </div>
+            </div>
+            <!-- page title area end -->
+            <div class="main-content-inner">
+                <div class="row">
+ <!-- Bordered Table start -->
+                    <div class="col-lg-12 mt-5">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="header-title">Feedback Details Information</h4>
+                                <div class="single-table">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered text-center">
+                                            <tbody>
+                                                <tr>
+                                                    <th scope="col">Subject</th>
+                                                    <td scope="row">@Html.DisplayFor(model => model.Subject)</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">By</th>
+                                                    <td>@Html.DisplayFor(model => model.Name)</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">Email</th>
+                                                    <td>@Html.DisplayFor(model => model.Email)</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">Phone</th>
+                                                    <td>@Html.DisplayFor(model => model.Phone)</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">Create At</th>
+                                                    <td>@Html.DisplayFor(model => model.CreateAt)</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">Content</th>
+                                                    <td>@Html.DisplayFor(model => model.Content)</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                    <!-- Bordered Table end -->

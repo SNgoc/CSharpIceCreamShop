@@ -1,0 +1,74 @@
+﻿@model IEnumerable<IceCreamClient.Areas.Admin.Models.tbAdmin>
+
+@{
+    ViewData["Title"] = "ViewAll";
+}
+
+<!-- page title area start -->
+            <div class="page-title-area">
+                <div class="row align-items-center">
+                    <div class="col-sm-6">
+                        <div class="breadcrumbs-area clearfix">
+                            <ul class="breadcrumbs pull-left">
+                                <li><a asp-controller="Home" asp-action="Index">Admin</a></li>
+                                <li><span>View All</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+<!-- page title area end -->
+<div class="alert-area">         
+                <div class="card">
+                     <div class="card-body">
+                                    @if(TempData["Success"] != null)
+                                    {
+                                    <div class="alert alert-success" role="alert">
+                                         <strong>Well done!</strong> @TempData["Success"]
+                                    </div>
+                                    }
+                                    @if(TempData["Error"] != null){
+                                    <div class="alert alert-danger" role="alert">
+                                        <strong>Oh snap!</strong> @TempData["Error"]
+                                    </div>
+                                    }                        
+                      </div>
+                  </div>
+</div>
+
+ <div class="main-content-inner">
+                <div class="row">
+                    <!-- Dark table start -->
+                    <div class="col-12 mt-5">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="header-title">All Admin</h4>
+                                <a asp-action="AddAdmin" asp-controller="Home" type="button" class="btn btn-success mb-3">Add Admin</a>                              
+                                <div class="data-tables">
+                                    <table id="dataTable3" class="text-center">
+                                        <thead class="text-capitalize">
+                                            <tr>
+                                                <th>No.</th>
+                                                <th>Username</th>
+                                                <th>Fullname</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @{int num = 1;}
+                                            @foreach (var item in Model) {
+                                            <tr>
+                                                <td> @num</td>
+                                                <td> @Html.DisplayFor(modelItem => item.Username)</td>
+                                                <td> @Html.DisplayFor(modelItem => item.Fullname)</td>                                               
+                                            </tr>
+                                            num++;
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Dark table end -->
+                </div>
+            </div>

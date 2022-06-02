@@ -1,0 +1,71 @@
+﻿@model IceCreamClient.Models.Category
+
+@{
+    ViewData["Title"] = "CreateCategory";
+}
+
+<!-- page title area start -->
+<div class="page-title-area">
+    <div class="row align-items-center">
+        <div class="col-sm-6">
+            <div class="breadcrumbs-area clearfix">
+                <ul class="breadcrumbs pull-left">
+                    <li><a href="#">Category</a></li>
+                    <li><span>Create</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- page title area end -->
+<div class="main-content-inner">
+    <div class="row">
+        <!-- data table start -->
+        <div class="col-12 mt-5">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="header-title">Create a new Category</h3>
+                    <div>
+                        <h4 style="text-align:center">Form Create</h4>
+                        <hr />
+                        <div class="row">
+                            <div class="col-md-6">
+                                @if (ViewData["success"] != null)
+                                {
+                                    <h4 style="color:forestgreen">@ViewData["success"]</h4>
+                                }
+                                @* Upload Image phải có enctype="multipart/form-data" *@
+                            <form asp-action="CreateCategory">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <div class="form-group">
+                                    <label asp-for="Name" class="control-label"></label>
+                                    <input asp-for="Name" class="form-control" />
+                                    <span asp-validation-for="Name" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Description" class="control-label"></label>
+                                    <textarea asp-for="Description" id="Description" class="form-control"></textarea> @*must using textarea, not input to fix null ckeditor*@
+                                    <span asp-validation-for="Description" class="text-danger"></span>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <input type="hidden" asp-for="CreateAt" class="form-control" />
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" value="Create" class="btn btn-primary" />
+                                </div>
+                            </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <a asp-action="Index">Back to List of Categories</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- data table end -->
+    </div>
+</div>
+<!-- main content area end -->
+

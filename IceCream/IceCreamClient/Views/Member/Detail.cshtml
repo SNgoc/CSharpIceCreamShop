@@ -1,0 +1,137 @@
+﻿@model IceCreamClient.Models.Member
+
+@{
+    ViewData["Title"] = "Detail";
+}
+ <!--Page Title-->
+        <section class="page-title centred" style="background-image: url(assets/images/background/page-title.jpg);">
+            <div class="auto-container">
+                <div class="content-box">
+                    <div class="title">
+                        <h1>User Detail</h1>
+                    </div>
+                    <ul class="bread-crumb clearfix">
+                        <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+                        <li>User</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+<!--End Page Title-->
+ <!-- specialmenu-section -->
+        <section class="specialmenu-section sec-pad" style="background-image: url(~/assets/images/background/menu-bg.jpg);">
+            <div class="auto-container">                
+                <div class="row clearfix">
+                    <div class="col-lg-6 col-md-12 col-sm-12 content-column">
+                        <div class="special-menu-box wow fadeInLeft animated animated" data-wow-delay="00ms" data-wow-duration="1500ms">
+                            <div class="bg-layer" style="background-image: url(~/assets/images/shape/shape-7.png);"></div>
+                            <div class="border-shape" style="background-image: url(~/assets/images/shape/shape-8.png);"></div>
+                            <div class="inner-box">
+                                <ul class="menu-list">
+                                    <li>
+                                        <div class="single-menu">
+                                            <div class="text">
+                                                <h4>Username</h4>
+                                                <div class="line"></div>
+                                                <div class="price-box">
+                                                    <span>@Html.DisplayFor(model => model.Username)</span>
+                                                </div>
+                                            </div>
+                                            <p>Username to login</p>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="single-menu">
+                                            <div class="text">
+                                                <h4>Fullname</h4>
+                                                <div class="line"></div>
+                                                <div class="price-box">
+                                                    <span>@Html.DisplayFor(model => model.Fullname)</span>
+                                                </div>
+                                            </div>
+                                            <p>your fullname(not to login)</p>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="single-menu">
+                                            <div class="text">
+                                                <h4>Email</h4>
+                                                <div class="line"></div>
+                                                <div class="price-box">
+                                                    <span>@Html.DisplayFor(model => model.Email)</span>
+                                                </div>
+                                            </div>
+                                            <p>Your email</p>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="single-menu">
+                                            <div class="text">
+                                                <h4>Register Day</h4>
+                                                <div class="line"></div>
+                                                <div class="price-box">
+                                                    <span>@Html.DisplayFor(model => model.RegisterDay)</span>
+                                                </div>
+                                            </div>
+                                            <p>The day you begin user</p>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="single-menu">
+                                            <div class="text">
+                                                <h4>User-day Left</h4>
+                                                <div class="line"></div>
+                                                <div class="price-box">
+                                                    @{
+                                                        TimeSpan userDay;
+                                                        if (Model.IdMemberOption == 1){
+                                                            userDay = Convert.ToDateTime(Model.RegisterDay).AddDays(+30) - DateTime.Now;
+                                                        }
+                                                        else
+                                                        {
+                                                            userDay = Convert.ToDateTime(Model.RegisterDay).AddDays(+365) - DateTime.Now;
+                                                        }
+                                                         var day = Math.Ceiling(userDay.TotalDays);
+                                                    }
+                                                    <span>@day</span>
+                                                </div>
+                                            </div>
+                                            <p>number of days you are still a user</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-12 col-sm-12 content-column">
+                        <div class="special-menu-box wow fadeInRight animated animated" data-wow-delay="00ms" data-wow-duration="1500ms">
+                            <div class="bg-layer" style="background-image: url(~/assets/images/shape/shape-7.png);"></div>
+                            <div class="border-shape" style="background-image: url(~/assets/images/shape/shape-8.png);"></div>
+                            <div class="inner-box">
+                                <ul class="menu-list">
+                                    <li>
+                                        <div class="single-menu">
+                                            <div class="text">
+                                                <h6>@Html.ActionLink("Edit your information", "Edit", new {  id = Model.Id })</h6></>                                                
+                                                <div class="line"></div>                                                
+                                            </div>
+                                        </div>
+                                           
+                                    </li>
+                                    <li>
+                                        <div class="single-menu">
+                                            <div class="text">
+                                                <h6>@Html.ActionLink("Change your password", "ChangePassword", new {  id = Model.Id })</h6></>                                                
+                                                <div class="line"></div>                                                
+                                            </div>
+                                        </div>
+                                    </li>
+                                 
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- specialmenu-section end -->

@@ -1,0 +1,116 @@
+﻿@model IEnumerable<IceCreamClient.Models.OrderDetailService>
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<!-- page title area start -->
+            <div class="page-title-area">
+                <div class="row align-items-center">
+                    <div class="col-sm-6">
+                        <div class="breadcrumbs-area clearfix">
+                            <ul class="breadcrumbs pull-left">
+                                <li><a asp-controller="Order" asp-action="Index">Order</a></li>
+                                <li><span>Order Details</span></li>
+                            </ul>
+                        </div>
+                    </div>                 
+                </div>
+            </div>
+            <!-- page title area end -->
+            <div class="main-content-inner">
+                <div class="row">
+ <!-- Bordered Table start -->
+                    <div class="col-lg-6 mt-5">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="header-title">Order Information</h4>
+                                <div class="single-table">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered text-center">
+                                            <thead>
+                                                <tr>
+                                                    <th>Book Title</th>
+                                                    <th>Price</th>
+                                                    <th>Quantity</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @{int? total =0;}
+                                                @foreach(var item in Model){
+                                                <tr>
+                                                    <td scope="col">@Html.DisplayFor(modelItem => item.BookIceCream.Title)</td>
+                                                    <td scope="row">@Html.DisplayFor(modelItem => item.Price)</td>
+                                                    <td scope="row">@Html.DisplayFor(modelItem => item.Quantity)</td>
+                                                </tr>
+                                                total += (item.Price*item.Quantity);
+                                                }
+                                                <tr>
+                                                    <th>Total Price</th>                                                    
+                                                    <td scope="row" colspan="2">@total </td>                                                  
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 mt-5">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="header-title">User Information</h4>
+                                <div class="single-table">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered text-center">
+                                            <tbody>
+                                                <tr>
+                                                    <th scope="col">Fullname</th>
+                                                    <td scope="row">@ViewBag.Order.Fullname</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">Phone</th>
+                                                    <td>@ViewBag.Order.Phone</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">Address</th>
+                                                    <td>@ViewBag.Order.Address</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">Email</th>
+                                                    <td>@ViewBag.Order.Email</td>
+                                                </tr> 
+                                                <tr>
+                                                     <th scope="row">Created At</th>
+                                                     <td>@ViewBag.Order.CreatedAt</td>
+                                                </tr> 
+                                                @if (ViewBag.Order.IsCompleted == true)
+                                                {
+                                                <tr>
+                                                    <th scope="row">Status</th>
+                                                     <td>Completed</td>
+                                                </tr>
+                                                }
+                                                else
+                                                {
+                                                <tr>
+                                                    <th scope="row">Status</th>
+                                                    <td>Waiting</td>
+                                                </tr>
+                                                <tr>
+                                                    <td scope="row" colspan="2">
+                                                        <a asp-action="Completed" asp-route-id="@ViewBag.Order.Id" class="btn btn-success">Change Status Order to Completed</a>
+                                                    </td>                                                  
+                                                </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+

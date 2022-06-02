@@ -1,0 +1,163 @@
+﻿@model IEnumerable<IceCreamClient.Models.Recipe>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+    <!--Page Title-->
+    <section class="page-title centred" style="background-image: url(assets/images/background/page-title.jpg);">
+        <div class="auto-container">
+            <div class="content-box">
+                <div class="title">
+                    <h1>
+                        @if (TempData["CategoryID"] != null)
+                            {
+                                if (TempData["CategoryID"].Equals(1))
+                                    {
+                                        @Html.Raw("Ice Cream")
+                                    }
+                                else if (TempData["CategoryID"].Equals(2))
+                                    {
+                                        @Html.Raw("Dessert")
+                                    }
+                            } 
+                        else
+                            {
+                                @Html.Raw("Recipe")
+                            }
+                    </h1>
+                </div>
+                <ul class="bread-crumb clearfix">
+                    <li><a asp-action="Index" asp-controller="Home">Home</a></li>
+                    <li>Recipe</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <!--End Page Title-->
+    <!-- news-section -->
+    <section class="news-section sec-pad-2 blog-grid">
+        <div class="auto-container">
+            <div class="row clearfix">
+                @foreach (var item in Model)
+            {
+                <div class="col-lg-4 col-md-6 col-sm-12 news-block">
+                    <div class="news-block-one wow fadeInUp animated animated" data-wow-delay="00ms" data-wow-duration="1500ms">
+                        <div class="inner-box">
+                            <figure class="image-box">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        @if (item.CategoryID == 1)
+                                        {
+                                            <span class="category">
+                                                Ice Cream
+                                            </span>
+                                        }
+                                        else if (item.CategoryID == 2)
+                                        {
+                                            <span class="category" style="background-color: yellowgreen;">
+                                                Dessert
+                                            </span>
+                                        }
+                                    </div>
+                                    <div class="col-sm-6 float-right">
+                                        @if (item.PayingRequired == true)
+                                        {
+                                            <span class="category" style="background-color: indianred;">
+                                                Paying User
+                                            </span>
+                                        }
+                                    </div>
+                                </div>
+                                <a asp-action="Details" asp-route-RecipeId="@item.RecipeId"><img src="~/images/recipe/@item.Thumbnail" style="height: 220px; width: auto;"></a>
+                            </figure>
+                            <div class="lower-content">
+                                <ul class="post-info clearfix">
+                                    <li><a asp-action="Details" asp-route-RecipeId="@item.RecipeId">@item.CreatedBy</a></li>
+                                </ul>
+                                <h3><a asp-action="Details" asp-route-RecipeId="@item.RecipeId">@item.Title</a></h3>
+                                <p style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">@item.Description</p>
+                                <div class="btn-box"><a asp-action="Details" asp-route-RecipeId="@item.RecipeId" class="theme-btn-two">Read More</a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }            
+            </div>
+            <div class="pagination-wrapper centred">
+                <ul class="pagination">
+                    @if (TempData["CategoryID"] == null)
+                    {
+                        int currentPage = Convert.ToInt32(TempData["CurrentPage"]);
+                        int totalPage = Convert.ToInt32(TempData["TotalPage"]);
+                        if (currentPage != 1 )
+                        {
+                            <li><a asp-action="Index" asp-controller="Recipe" asp-route-page="@(Convert.ToInt32(currentPage - 1))">Prev</a></li>
+                        }
+                        else
+                        {
+                            <li><a href="javascript:void(0)">Prev</a></li>
+                        }
+
+                        for (int i = 1; i <= totalPage; i++)
+                        {
+                            if (currentPage == i)
+                            {
+                                <li><a href="javascript:void(0)" class="active">@i</a></li>
+                            }
+                            else
+                            {
+                                <li><a asp-action="Index" asp-controller="Recipe" asp-route-page="@i">@i</a></li>
+                            }
+                        }
+
+                        if (currentPage < totalPage)
+                        {
+                            <li><a asp-action="Index" asp-controller="Recipe" asp-route-page="@(Convert.ToInt32(currentPage + 1))">Next</a></li>
+                        }
+
+                        if (currentPage == totalPage)
+                        {
+                            <li><a href="javascript:void(0)">Next</a></li>
+                        }
+                    }
+                    else
+                    {
+                        int currentPage = Convert.ToInt32(TempData["CurrentPage"]);
+                        int totalPage = Convert.ToInt32(TempData["TotalPage"]);
+                        if (currentPage != 1)
+                        {
+                            <li><a asp-action="Index" asp-controller="Recipe" asp-route-CategoryID="@TempData["CategoryID"]" asp-route-page="@(Convert.ToInt32(currentPage - 1))">Prev</a></li>
+                        }
+                        else
+                        {
+                            <li><a href="javascript:void(0)">Prev</a></li>
+                        }
+
+                        for (int i = 1; i <= totalPage; i++)
+                        {
+                            if (currentPage == i)
+                            {
+                                <li><a href="javascript:void(0)" class="active">@i</a></li>
+                            }
+                            else
+                            {
+                                <li><a asp-action="Index" asp-controller="Recipe" asp-route-CategoryID="@TempData["CategoryID"]" asp-route-page="@i">@i</a></li>
+                            }
+                        }
+
+                        if (currentPage < totalPage)
+                        {
+                            <li><a asp-action="Index" asp-controller="Recipe" asp-route-CategoryID="@TempData["CategoryID"]" asp-route-page="@(Convert.ToInt32(currentPage + 1))">Next</a></li>
+                        }
+
+                        if (currentPage == totalPage)
+                        {
+                            <li><a href="javascript:void(0)">Next</a></li>
+                        }
+                    }
+                </ul>
+            </div>
+        </div>
+    </section>
+    <!-- news-section end -->
+

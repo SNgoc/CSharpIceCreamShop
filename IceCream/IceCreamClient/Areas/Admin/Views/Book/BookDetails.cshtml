@@ -1,0 +1,123 @@
+﻿@model IceCreamClient.Models.BookIceCream
+
+@{
+    ViewData["Title"] = "BookDetails";
+    List<Category> categories = TempData["ListCate"] as List<Category>;
+}
+
+<!-- page title area start -->
+<div class="page-title-area">
+    <div class="row align-items-center">
+        <div class="col-sm-6">
+            <div class="breadcrumbs-area clearfix">
+                <ul class="breadcrumbs pull-left">
+                    <li><a asp-action="ShowBooks" asp-controller="Book">Book</a></li>
+                    <li><span>Details</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- page title area end -->
+<div class="main-content-inner">
+    <div class="row">
+        <!-- data table start -->
+        <div class="col-12 mt-5">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="header-title">Book Details</h3>
+                    <div>
+                        <h4 style="text-align:center">@Html.DisplayFor(model => model.Title)</h4>
+                        <hr />
+                        <dl class="row">
+                            <dt class="col-sm-2">
+                                @Html.DisplayNameFor(model => model.BookId)
+                            </dt>
+                            <dd class="col-sm-10">
+                                @Html.DisplayFor(model => model.BookId)
+                            </dd>
+                            <dt class="col-sm-2">
+                                @Html.DisplayName("Category")
+                            </dt>
+                            @* Category *@
+                        <dd class="col-sm-10">
+
+                            @foreach (var item in categories)
+                            {
+                                if (Model.CatId == item.CatId)
+                                {
+                                    @item.Name
+                                    break;
+                                }
+                            }
+                        </dd>
+                            <dt class="col-sm-2">
+                                @Html.DisplayNameFor(model => model.Title)
+                            </dt>
+                            <dd class="col-sm-10">
+                                @Html.DisplayFor(model => model.Title)
+                            </dd>
+                            <dt class="col-sm-2">
+                                @Html.DisplayNameFor(model => model.Author)
+                            </dt>
+                            <dd class="col-sm-10">
+                                @Html.DisplayFor(model => model.Author)
+                            </dd>
+                            <dt class="col-sm-2">
+                                @Html.DisplayNameFor(model => model.Description)
+                            </dt>
+                            <dd class="col-sm-10">
+                                @*Display text decoding html entity*@
+                                @Html.Raw(Model.Description)
+                            </dd>
+                            <dt class="col-sm-2">
+                                @Html.DisplayNameFor(model => model.Price)
+                            </dt>
+                            <dd class="col-sm-10">
+                                @Html.DisplayFor(model => model.Price)
+                            </dd>
+                            <dt class="col-sm-2">
+                                @Html.DisplayNameFor(model => model.Image)
+                            </dt>
+                            <dd class="col-sm-10">
+                                @* hiển thị image*@
+                                @if (Model.Image != null)
+                                {
+                                    <div>
+                                        <img src="~/images/book/@Model.Image" alt="picture" style="width: 100px; height: 100px;" />
+                                    </div>
+                                }
+                            </dd>
+                            <dt class="col-sm-2">
+                                @Html.DisplayNameFor(model => model.Active)
+                            </dt>
+                            @* Active *@
+                            <dd class="col-sm-10">
+                                @if (Model.Active == true)
+                                {
+                                    @:Yes
+                                }
+                                else
+                                {
+                                    @:No
+                                }
+                            </dd>
+                            <dt class="col-sm-2">
+                                @Html.DisplayNameFor(model => model.CreateAt)
+                            </dt>
+                            <dd class="col-sm-10">
+                                @Html.DisplayFor(model => model.CreateAt)
+                            </dd>
+                        </dl>
+                    </div>
+                    <div>
+                        @Html.ActionLink("Update", "UpdateBook", new { bookId = Model.BookId }) |
+                        <a asp-action="ShowBooks">Back to List Books</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- data table end -->
+    </div>
+</div>
+<!-- main content area end -->
